@@ -7,7 +7,10 @@
   discounted: product.is_discounted?,
   tax: product.tax,
   total: product.total,
-  in_stock: products.in_stock
+  in_stock: product.in_stock,
+  formatted: {
+    price: number_to_currency(product.price)
+  }
 
 
 }

@@ -28,7 +28,7 @@ end
 
 def update
   the_id = params[:id]
-  @product = Product.find_by(id: params[:id])
+  @product = Product.find_by(id: params[:id]) 
   @product.name = params[:name]
   @product.description = params[:idescription]
   @product.image_url = params[:image_url]
