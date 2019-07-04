@@ -21,9 +21,11 @@ def create
     price: params[:price]
     
   })
-  @product.save
+  if @product.save
   render 'create.json.jb'
-  
+  else
+  render 'error.json.jb'
+  end
 end
 
 def update
@@ -33,9 +35,12 @@ def update
   @product.description = params[:idescription]
   @product.image_url = params[:image_url]
   @product.price = params[:price]
-  @product.save
-  render 'update.json.jb'
-    
+  
+  if @product.save
+    render 'update.json.jb'
+  else
+    render 'error.json.jb'
+  end  
 end
 def destroy
   the_id = params[:id]
