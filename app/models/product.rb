@@ -1,4 +1,11 @@
 class Product < ApplicationRecord
+  validates :name, presence: true
+  validates :price, presence: true
+  validates :name, uniquenss: true
+  validates :description, presence: true
+  validates :description, length: { in: 10..500 }
+  validates :image_url, length: { maximum: 255 }
+  validates :price, numericality: { greater_than: 0 }
   def is_discounted?
     if  price < 10
       return true
@@ -12,7 +19,9 @@ class Product < ApplicationRecord
   def total
     price + tax
   end
+  
 end
+
 
 # def tax
 #     tax_rate = 0.09
