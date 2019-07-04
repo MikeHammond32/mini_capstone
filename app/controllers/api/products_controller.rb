@@ -31,10 +31,10 @@ end
 def update
   the_id = params[:id]
   @product = Product.find_by(id: params[:id]) 
-  @product.name = params[:name]
-  @product.description = params[:idescription]
-  @product.image_url = params[:image_url]
-  @product.price = params[:price]
+  @product.name = params[:name] || product.name,
+  @product.description = params[:idescription] || product.description,
+  @product.image_url = params[:image_url] || product.image_url,
+  @product.price = params[:price] || product.price
   
   if @product.save
     render 'update.json.jb'
