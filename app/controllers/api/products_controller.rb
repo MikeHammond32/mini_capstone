@@ -1,7 +1,7 @@
 class Api::ProductsController < ApplicationController
   def index
-    if params[:search]
-    @products = Product.where("name LIKE ?", "%#{params[:search]}%")
+    if params[:sort] 
+    @products = Product.all.order(price: :asc)
     else
     @products = Product.all
     end
