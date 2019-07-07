@@ -1,11 +1,18 @@
 class Api::ProductsController < ApplicationController
   def index
+    if params[:search]
+    @products = Product.where("name LIKE ?", "%#{params[:search]}%")
+    else
     @products = Product.all
+    end
+  @products = @products.order(:id => :asc)
     render 'index.json.jb'
   end
+end
 def show
+  # product_search = params[:search]
   the_id = params[:id]
-  @product = Product.find_by(id: params[:id])
+  @product = Product.find_by(id: the_id)
   render 'show.json.jb'
 end
   # def allproducts
@@ -31,9 +38,9 @@ end
 def update
   the_id = params[:id]
   @product = Product.find_by(id: params[:id]) 
-  @product.name = params[:name] || product.name,
-  @product.description = params[:idescription] || product.description,
-  @product.image_url = params[:image_url] || product.image_url,
+  @product.name = params[:name] || product.name
+  @product.description = params[:idescription] || product.description
+  @product.image_url = params[:image_url] || product.image_url
   @product.price = params[:price] || product.price
   
   if @product.save
@@ -51,4 +58,3 @@ def destroy
 end
 #change url parameter so that a different item shows up
 # find a way to connect the userinput to the id that I have saved for each product
-end
