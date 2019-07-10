@@ -2,15 +2,14 @@
   id: product.id,
   name: product.name,
   description: product.description,
-  image_url: product.image_url,
+  # image_url: product.image_url,
+  images: product.images,
   price: product.price,
   discounted: product.is_discounted?,
   tax: product.tax,
   total: product.total,
   in_stock: product.in_stock,
+  supplier_name: product.supplier.name,
   formatted: {
-    price: number_to_currency(product.price)
-  }
-
-
+    price: number_to_currency(product.price)}
 }
