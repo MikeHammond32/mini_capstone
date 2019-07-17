@@ -15,22 +15,41 @@ class Api::OrdersController < ApplicationController
   def create
     # subtotal
     # quantity * price
-    product = Product.find_by(id: params[:product_id])
+  carted = current_user.carted_products.map{|product| product if product.status = "carted"}
 
-    calculated_subtotal = params[:quantity].to_i * product.price
-    calculated_tax = params[:quantity].to_i * product.tax
-    calculated_total = calculated_subtotal + calculated_tax
+    order 
 
 
-    @order = Order.new(
-      quantity: params[:quantity],
-      subtotal: calculated_subtotal,
-      tax: calculated_tax,
-      total: calculated_total,
-      user_id: current_user.id,
-      product_id: params[:product_id]
-    )
+    @order = []
+
+  i = 0
+  while i < carted.length
+   tax = (params[:subtotal].to_f *
+   0.09.to_f)/(100.to_i)
+   total = tax.to_f + params[:subtotal].to_f
+   @orders = Order.new(
+   user_id: params[:user_id],
+   subtotal: params[:subtotal], 
+   tax: tax,
+   total: total)
+
     @order.save
-    render 'show.json.jb'
+    @order << @orders
+    i+=1
   end
+
+  i = 0
+  while i < carted.length
+    carted[i].status = "purchased"
+    carted[i].save
+    i+=1
+  end
+  i = 0 
+  while i < @order.length
+    carted[i].status = "purchased"
+    carted[i].save
+    i+=1
+  end
+  render 'index.json.jb'
+
 end
