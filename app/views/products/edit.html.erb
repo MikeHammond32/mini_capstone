@@ -1,0 +1,8 @@
+<form action="/rproducts/<%= @product.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <p>name: <input type="text" name="title" value="<%= @product.name %>"></p>
+  <p>description: <input type="text" name="ingredients" value="<%= @oroduct.description %>"></p>
+  <p>price: <input type="text" name="directions" value="<%= @product.price %>"></p>
+
+  <input type="submit" value="edit this product">
+</form>

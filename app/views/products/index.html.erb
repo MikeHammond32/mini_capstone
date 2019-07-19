@@ -1,1 +1,7 @@
 Hey there from index
+<% @products.each do |product| %>
+  <p>Title: <%= product.name %></p>
+  <a href="/products/<%= product.id %>">Take a closer look at the product</a>
+  <p>Description: <%= products.description %></p>
+  <hr>
+<% end %>
