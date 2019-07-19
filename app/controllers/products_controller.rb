@@ -24,10 +24,15 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @product.update(
     name: params[:name],
-    description: params[:description,
+    description: params[:description],
     price: params[:price],
     user_id: params[:user_id]
 
       )
+  end
+  def destroy
+    @product = Product.find_by(id: params[:id])
+    @product.destroy
+    redirect_to "/products"
   end
 end
